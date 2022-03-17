@@ -46,8 +46,8 @@ void StartScreen3_1()
 	printy("<a> <b> <c>\n");
 	printr("Example: "); 
 	printy("13 11 215      ");
-	printr("Result --> "); 
-	printy("1290x - 1075y = 215\n\n");
+	printr("Result -->     "); 
+	printr("-1075"); printy(" * 13 + "); printr("1290"); printy(" * 11 = 215\n\n");
 }
 
 void StartScreen3_2()
@@ -55,7 +55,7 @@ void StartScreen3_2()
 	printr("Type: ");
 	printy("<k1> <k2> <k3> ...\n");
 	printr("Example: "); 
-	printy("2x^2 - 5x + 2 = 0    Type: 2 -5 2      ");
+	printy("If you have: 2x^2 - 5x + 2 = 0    Type: 2 -5 2      ");
 	printr("Result --> "); 
 	printy("2 | 0.5\n\n");
 }

@@ -45,8 +45,8 @@ pair <ll, ll> Diafant(ll a, ll b, ll c)
 	}
 
 	pair <ll, ll> ans;
-	ans.first = p[p.size() - 2]; ans.second = -l[l.size() - 2];
-	if(q.size() % 2 == 0)
+	ans.first = -p[p.size() - 2]; ans.second = l[l.size() - 2];
+	if((q.size() - 1) % 2 == 0)
 		ans.first *= c, ans.second *= c;
 	else
 		ans.first *= -c, ans.second *= -c;
