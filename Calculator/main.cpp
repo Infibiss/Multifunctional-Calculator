@@ -291,31 +291,32 @@ int main()
 				{
 					vector <str> res;
 					Split(res, inp, ' ');
-					if( (res[0].size() == 1 && isdigit(res[0][0]) || res[0].size() == 2 && isdigit(res[0][0]) && isdigit(res[0][1]) ) &&
-						(res[1].size() == 1 && isdigit(res[1][0]) || res[1].size() == 2 && isdigit(res[1][0]) && isdigit(res[1][1]) ) )
+
+					for(int i = 0; i < res.size(); i++)
+						for(int j = 0; j < res[i].size(); j++)
+							if(isdigit(res[i][j]) == 0)
+								throw 1;
+					
+					int radix1 = stoi(res[0]), radix2 = stoi(res[1]); str num = res[2];
+					if(radix1 < 2 || radix1 > 36 || radix2 < 2 || radix2 > 36)
+						throw 1;
+					else
 					{
-						int radix1 = stoi(res[0]), radix2 = stoi(res[1]); str num = res[2];
-						if(radix1 < 2 || radix1 > 36 || radix2 < 2 || radix2 > 36)
+						string result = Num2Num(radix1, radix2, num);
+						if(result == "WRONG NUMBER")
 							throw 1;
 						else
 						{
-							string result = Num2Num(radix1, radix2, num);
-							if(result == "WRONG NUMBER")
-								throw 1;
-							else
+							printg("Answer = ");
+							for(int i = result.size() - 1; i >=0 ; i--)
 							{
-								printg("Answer = ");
-								for(int i = result.size() - 1; i >=0 ; i--)
-								{
-									str s = ""; s += result[i];
-									printg(s);
-								}
-								printg("\n\n");
+								str s = ""; s += result[i];
+								printg(s);
 							}
+							printg("\n\n");
 						}
-
 					}
-					else throw 1;
+
 				}
 				if(mode == 3)
 				{
@@ -332,8 +333,7 @@ int main()
 						int x = stoi(res[0]), y = stoi(res[1]), z = stoi(res[2]);
 						pair <ll, ll> a = Diafant(x, y, z);
 
-						printg("Answer = "); printg(to_string(a.second)); printg(" "); printg(to_string(a.first));
-						cout << "\n\n";
+						printg("Answer = "); green(); cout << a.second << ' ' << a.first << "\n\n";
 					}
 					else
 					{
