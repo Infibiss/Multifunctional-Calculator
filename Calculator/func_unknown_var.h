@@ -95,8 +95,8 @@ void Highdeg(vector <string> &ans, vector <ll> &k)
 				double d = k[1] * k[1] - 4 * k[0] * k[2];
 				if(sqrt(d) != (ll)(sqrt(d)))
 				{
-					ans.push_back( "(" + to_string(-k[1]) + " + #" + to_string((ll)(d)) + ") / " + to_string(2 * k[0]) );
-					ans.push_back( "(" + to_string(-k[1]) + " - #" + to_string((ll)(d)) + ") / " + to_string(2 * k[0]) );
+					ans.push_back( "(" + to_string(-k[1]) + " + sqrt(" + to_string((ll)(d)) + ")) / " + to_string(2 * k[0]) );
+					ans.push_back( "(" + to_string(-k[1]) + " - sqrt(" + to_string((ll)(d)) + ")) / " + to_string(2 * k[0]) );
 					flag = true;
 				}
 			}
