@@ -7,7 +7,7 @@ using namespace std;
 
 int IfOper(char c) 
 { 
-	if (c == '+' || c == '-' || c == '/' || c == '\\' || c == '$' || c == '*' || c == '%' || c == '^' || c == '!' || c == '#' || c == ':' || c == ';' || c == '|' || c == '&' || c == '~') return 1; 
+	if (c == '+' || c == '-' || c == '/' || c == '\\' || c == '$' || c == '*' || c == '%' || c == '^' || c == '!' || c == '#' || c == '@' || c == ':' || c == ';' || c == '|' || c == '&' || c == '~') return 1; 
 	else if (c == '(') return 2; 
 	else if (c == ')') return 3; 
 	else if(c >= '0' && c <= '9') return 4;
@@ -50,6 +50,7 @@ int Priority(char c)
 		case '^': return 6; break;
 		case '!': return 6; break;
 		case '#': return 6; break;
+		case '@': return 6; break;
 		case ':': return 6; break;
 		case ';': return 6; break;
 		case '(': return 7; break;
@@ -74,7 +75,7 @@ void CheckMulti(string &s)
 {
 	for(int i = 0, j, z; i < s.size(); i++)
 	{
-		if(s[i] == '(' || s[i] == '#' || s[i] == ':' || s[i] == ';' || s[i] == '$')
+		if(s[i] == '(' || s[i] == '#' || s[i] == '@' || s[i] == ':' || s[i] == ';' || s[i] == '$')
 		{	
 			for(j = i - 1; j >= 0 && s[j] == ' ';) j--;
 
@@ -88,7 +89,7 @@ void CheckMulti(string &s)
 	return;
 }
 
-void CheckSinCosAbs(string &s)
+void CheckWords(string &s)
 {
 	for(int i = 0; i + 2 < s.size(); i++)
 	{
@@ -106,6 +107,16 @@ void CheckSinCosAbs(string &s)
 		{
 			s.erase(i, 3);
 			s.insert(i, "$"); // abs
+		}
+		else if(i + 3 < s.size() && s[i] == 's' && s[i + 1] == 'q' && s[i + 2] == 'r' && s[i + 3] == 't')
+		{
+			s.erase(i, 4);
+			s.insert(i, "#"); // sqrt
+		}
+		else if(i + 3 < s.size() && s[i] == 'c' && s[i + 1] == 'b' && s[i + 2] == 'r' && s[i + 3] == 't')
+		{
+			s.erase(i, 4);
+			s.insert(i, "@"); // cbrt
 		}
 	}
 }

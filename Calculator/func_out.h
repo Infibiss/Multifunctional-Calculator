@@ -5,8 +5,6 @@
 
 using namespace std;
 
-//template <typename T>
-
 HANDLE hOUTPUT = GetStdHandle(STD_OUTPUT_HANDLE);
 void yellow(){SetConsoleTextAttribute(hOUTPUT, FOREGROUND_RED | FOREGROUND_GREEN);}
 void white(){SetConsoleTextAttribute(hOUTPUT, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);}
@@ -26,7 +24,7 @@ void StartScreenMain()
 void StartScreen1()
 {
 	printr("Operators: ");
-	printy("+  -  *  /  \\  \%  ^  !  #  sin  cos  abs  &  |  ~\n");
+	printy("+  -  *  /  \\  \%  ^  !  sqrt  cbrt  sin  cos  abs  &  |  ~\n");
 	printr("Type \"help\" for better instruction for mode 1\n\n");
 }
 
@@ -45,9 +43,9 @@ void StartScreen3_1()
 	printr("Type: ");
 	printy("<a> <b> <c>\n");
 	printr("Example: "); 
-	printy("13 11 215      ");
-	printr("Result -->     "); 
-	printr("-1075"); printy(" * 13 + "); printr("1290"); printy(" * 11 = 215\n\n");
+	printy("13 11 215\n");
+	printr("Result:\n"); 
+	printy("/ x = -1075 - 11 * t\n\\ y = 1290 + 13 * t\n\n");
 }
 
 void StartScreen3_2()
@@ -60,10 +58,23 @@ void StartScreen3_2()
 	printy("2 | 0.5\n\n");
 }
 
+void StartScreen3_3()
+{
+	printr("Type: ");
+	printy("<num1> <num2>\n");
+	printr("Example: "); 
+	printy("12 17\n");
+	printr("Result:\n"); 
+	printy("gcd = 1\n/ x = -7 - 17 * t\n\\ y = 5 + 12 * t\n\n");
+}
+
 void Instruction()
 {
-	printy("\nCommands:\nclear --> clear the cmd\nclose --> close the program\nmode --> change mode\n");
-	printy("Operators:\n+ --> addition\n- --> subtraction\n* --> multiplication\n/ --> floating point division\n\\ --> integer division\n\% --> modulus\n^ --> exponentiation\n! --> factorial\n# --> square root\nsin --> sine\ncos --> cosine\nabs --> absolute value\n& --> AND\n| --> OR\n~ --> XOR\n");
-	printy("Examples: a + b | a - b | a * b | a / b | a \% b | a ^ b | a! or !a | #a | sin a | cos b | abs a | a & b | a | b | a ~ b\n\n");
+	printr("\nCommands:");
+	printy("\nclear --> clear the cmd\nclose --> close the program\nmode --> change mode\n");
+	printr("Operators:");
+	printy("\n+ --> addition\n- --> subtraction\n* --> multiplication\n/ --> floating point division\n\\ --> integer division\n\% --> modulus\n^ --> exponentiation\n! --> factorial\nsqrt --> square root\ncbrt --> cubic root\nsin --> sine\ncos --> cosine\nabs --> absolute value\n& --> AND\n| --> OR\n~ --> XOR\n");
+	printr("Examples:");
+	printy("\n\"a + b\" | \"a - b\" | \"a * b\" | \"a / b\" | \"a \% b\" | \"a ^ b\" | \"a!\" | \"sqrt(a)\" | \"cbrt(a)\" | \"sin(a)\" | \"cos(b)\" | \"abs(a)\" | \"a & b\" | \"a | b\" | \"a ~ b\"\n\n");
 }
 

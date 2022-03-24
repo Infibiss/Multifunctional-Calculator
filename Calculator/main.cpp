@@ -35,7 +35,7 @@ void MakeAnswer(str s, vector <Cell> &ans)
 				while(!operat.empty() && operat.back().second >= x.second && 
 					operat.back().first != '(' && operat.back().first != '#' && 
 					operat.back().first != ':' && operat.back().first != ';' && 
-					operat.back().first != '$')
+					operat.back().first != '$' && operat.back().first != '@')
 				{
 					ans.push_back({false, db(INF), operat.back().first});
 					operat.pop_back();
@@ -126,6 +126,11 @@ void MainOut(vector <Cell> &ans)
 				{
 					if(x1 < 0) throw 7;
 					out.push(sqrt(x1)); break;
+				}
+				case '@': 
+				{
+					if(x1 < 0) throw 18;
+					out.push(cbrt(x1)); break;
 				}
 				case '\\':
 				{
@@ -227,7 +232,8 @@ int main()
 				else
 				{
 					if(tmpmode == 1) {cout << '\n'; StartScreen3_1();}
-					else {cout << '\n'; StartScreen3_2();}
+					else if(tmpmode == 2) {cout << '\n'; StartScreen3_2();}
+					else {cout << '\n'; StartScreen3_3();}
 				}
 			}
 			else if(inp == "close" || inp == "Close" || inp == "CLOSE")
@@ -248,11 +254,12 @@ int main()
 						cout << '\n';
 						while(1)
 						{
-							printy("1) Diophantine equation 2) Equation of higher degrees\n");
+							printy("1) Diophantine equation 2) Equation of higher degrees 3) Advanced Euclid algorithm\n");
 							str choosemode1; getline(cin, choosemode1);
 							tmpmode = choosemode1[0] - '0';
 							if(tmpmode == 1) {cout << '\n'; StartScreen3_1(); break;}
 							else if(tmpmode == 2) {cout << '\n'; StartScreen3_2(); break;}
+							else if(tmpmode == 3) {cout << '\n'; StartScreen3_3(); break;}
 							else {printr("Error -> "); printy("Wrong input\n\n");};
 						}
 					}
@@ -263,7 +270,7 @@ int main()
 			{
 				if(mode == 1)
 				{
-					CheckSinCosAbs(inp);
+					CheckWords(inp);
 
 					bool flag = true;
 					forup(i, inp.size())
@@ -323,6 +330,9 @@ int main()
 					vector <str> res;
 					Split(res, inp, ' ');
 
+					if(res.size() == 0) 
+						throw 1;
+
 					forup(i, res.size())
 						forup(j, res[i].size())
 							if(IfOper(res[i][j]) != 4 && res[i][j] != ' ' && res[i][j] != '-' && res[i][j] != '+')
@@ -330,12 +340,22 @@ int main()
 
 					if(tmpmode == 1)
 					{
+						if(res.size() != 3) throw 1;
 						int x = stoi(res[0]), y = stoi(res[1]), z = stoi(res[2]);
+						if(x == 0 || y == 0) throw 1;
 						pair <ll, ll> a = Diafant(x, y, z);
 
-						printg("Answer = "); green(); cout << a.second << ' ' << a.first << "\n\n";
+						printg("Answer:\n"); 
+						green(); cout << "/ x = " << a.second;
+						if(y > 0) cout << " - " << y << " * t\n";
+						else cout << " + " << y << " * t\n";
+
+						cout << "\\ y = " << a.first;
+						if(x > 0) cout << " + " << x << " * t\n";
+						else cout << " - " << x << " * t\n\n";
+
 					}
-					else
+					else if(tmpmode == 2)
 					{
 						vector <ll> k(res.size());
 						for(int i = 0; i < res.size(); i++)
@@ -346,10 +366,26 @@ int main()
 
 						if(ans.size() == 0)
 							throw 17;
-						printg("Answer = | ");
+						printg("Roots = | ");
 						for(int i = 0; i < ans.size(); i++)
 							printg(ans[i] + " | ");
 						cout << "\n\n";
+					}
+					else
+					{
+						if(res.size() != 2) throw 1;
+						ll a = stoi(res[0]), b = stoi(res[1]), x0, y0, gcdnum;
+						gcdnum = gcd(a, b, x0, y0);
+
+						printg("Answer:\n"); 
+						green(); cout << "gcd = " << gcdnum << '\n';
+						cout << "/ x = " << x0;
+						if(b > 0) cout << " - " << b << " * t\n";
+						else cout << " + " << b << " * t\n";
+
+						cout << "\\ y = " << y0;
+						if(a > 0) cout << " + " << a << " * t\n";
+						else cout << " - " << a << " * t\n\n";
 					}
 				}
 			}
@@ -364,6 +400,7 @@ int main()
 			if(err == 5)  {printr("Error -> "); printy("Wrong input / \n\n");}
 			if(err == 6)  {printr("Error -> "); printy("Wrong input ^ \n\n");}
 			if(err == 7)  {printr("Error -> "); printy("Negative square root\n\n");}
+			if(err == 18) {printr("Error -> "); printy("Negative cubic root\n\n");}
 			if(err == 8)  {printr("Error -> "); printy("Wrong input \\ \n\n");}
 			if(err == 9)  {printr("Error -> "); printy("Devision by zero\n\n");}
 			if(err == 10) {printr("Error -> "); printy("Negative factorial\n\n");}

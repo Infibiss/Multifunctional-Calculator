@@ -15,7 +15,8 @@
 	- % : modulus
 	- ^ : exponentiation
 	- \! : factorial
-	- \# : square root
+	- sqrt : square root
+	- cbrt : cubic root
 	- sin : sine
 	- cos : cosine
 	- abs : absolute value
@@ -32,6 +33,7 @@
 4. Find unknown variable
     - Diophantine equation
     - Equation of higher degrees
+    - Advanced Euclid algorithm
 
 
 
