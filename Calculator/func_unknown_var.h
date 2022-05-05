@@ -58,13 +58,29 @@ void Fill_del(vector <ll> &v, ll num)
 	num = abs(num);
 	ll end = sqrt(num);
 	for(ll i = 1; i <= end; i++)
-		if(num % i == 0) {v.push_back(i); v.push_back(-i); v.push_back(num / i); v.push_back(-1 * num / i);} 
+		if(num % i == 0) {
+			if(i * i != num){
+				v.push_back(i); 
+				v.push_back(-i); 
+			}
+			v.push_back(num / i); 
+			v.push_back(-1 * num / i);
+		} 
 
 	sort(v.begin(), v.end());
 }
 
 void Highdeg(vector <string> &ans, vector <ll> &k)
 {
+	if(k[k.size() - 1] == 0){
+		ans.push_back("0");
+		while(!k.empty() && k[k.size() - 1] == 0)
+			k.pop_back();
+	}
+
+	if(k.size() < 2)
+		return;
+
 	vector <ll> p;
 	Fill_del(p, k[k.size() - 1]);
 	vector <ll> q;
@@ -93,10 +109,15 @@ void Highdeg(vector <string> &ans, vector <ll> &k)
 			if(end == 3)
 			{
 				double d = k[1] * k[1] - 4 * k[0] * k[2];
-				if(sqrt(d) != (ll)(sqrt(d)))
+				if(d >= 0 && sqrt(d) != (ll)(sqrt(d)))
 				{
-					ans.push_back( "(" + to_string(-k[1]) + " + sqrt(" + to_string((ll)(d)) + ")) / " + to_string(2 * k[0]) );
-					ans.push_back( "(" + to_string(-k[1]) + " - sqrt(" + to_string((ll)(d)) + ")) / " + to_string(2 * k[0]) );
+					if(d > 0){
+						ans.push_back( "(" + to_string(-k[1]) + " + sqrt(" + to_string((ll)(d)) + ")) / " + to_string(2 * k[0]) );
+						ans.push_back( "(" + to_string(-k[1]) + " - sqrt(" + to_string((ll)(d)) + ")) / " + to_string(2 * k[0]) );
+					}
+					else if(d == 0){
+						ans.push_back( to_string( (-k[1] * 1.0) / (2 * k[0]) ) );
+					}
 					flag = true;
 				}
 			}
