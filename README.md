@@ -1,6 +1,6 @@
 # **_CALCULATOR_**
 ### **Using [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)**
-### **Made by [Matr1X22](https://github.com/Matr1X22?tab=repositories)**
+### **Made by [Infibiss](https://github.com/Infibiss?tab=repositories)**
 ### If you found bugs, please write me in private messages
 
 #### _Functions of the calculator:_
